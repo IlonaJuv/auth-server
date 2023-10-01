@@ -1,6 +1,6 @@
 import {Document} from 'mongoose';
 interface User extends Document {
-  full_name: string;
+  user_name: string;
   email: string;
   role: 'user' | 'admin';
   password: string;
@@ -8,7 +8,7 @@ interface User extends Document {
 
 interface OutputUser {
   id?: string;
-  full_name: string;
+  user_name: string;
   email: string;
 }
 

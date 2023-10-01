@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import LoginMessageResponse from '../../interfaces/LoginMessageResponse';
 
 const loginPost = async (
-  req: Request<{}, {}, User>,
+  req: Request<{}, {}, {username: string; password: string}>,
   res: Response,
   next: NextFunction
 ) => {
@@ -24,9 +24,9 @@ const loginPost = async (
       return;
     }
 
-    const {email, password} = req.body;
+    const {username, password} = req.body;
 
-    const user = await userModel.findOne({email});
+    const user = (await userModel.findOne({email: username})) as User;
 
     if (!user) {
       next(new CustomError('Incorrect username/password', 403));
@@ -46,7 +46,7 @@ const loginPost = async (
     const message: LoginMessageResponse = {
       message: 'Login successful',
       user: {
-        full_name: user.full_name,
+        user_name: user.user_name,
         email: user.email,
         id: user._id,
       },

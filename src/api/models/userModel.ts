@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import {User} from '../../interfaces/User';
 
 const userModel = new mongoose.Schema<User>({
-  full_name: {
+  user_name: {
     type: String,
     required: true,
   },
