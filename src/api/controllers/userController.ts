@@ -7,12 +7,10 @@ import bcrypt from 'bcrypt';
 import DBMessageResponse from '../../interfaces/DBMessageResponse';
 const salt = bcrypt.genSaltSync(12);
 
-// TODO: add function check, to check if the server is alive
 const check = (req: Request, res: Response) => {
   res.json({message: 'Server up'});
 };
 
-// TODO: add function to get all users
 const userListGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const users = await userModel.find().select('-password -role');
@@ -22,7 +20,6 @@ const userListGet = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// TODO: add function to get a user by id
 const userGet = async (
   req: Request<{id: String}>,
   res: Response,
@@ -42,7 +39,6 @@ const userGet = async (
   }
 };
 
-// TODO: add function to create a user
 const userPost = async (
   req: Request<{}, {}, User>,
   res: Response,
@@ -82,7 +78,6 @@ const userPost = async (
   }
 };
 
-// TODO: add function to update a user
 const userPut = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userFromToken: OutputUser = res.locals.user as OutputUser;
@@ -117,7 +112,6 @@ const userPut = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// TODO: add function to delete a user
 const userDelete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userFromToken: OutputUser = res.locals?.user as OutputUser;
@@ -215,7 +209,6 @@ const userPutAsAdmin = async (
   }
 };
 
-// TODO: add function to check if a token is valid
 const checkToken = async (req: Request, res: Response, next: NextFunction) => {
   const userFromToken: OutputUser = res.locals.user as OutputUser;
   const message: DBMessageResponse = {
