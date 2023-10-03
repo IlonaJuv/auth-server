@@ -86,11 +86,8 @@ const userPost = async (
 const userPut = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userFromToken: OutputUser = res.locals.user as OutputUser;
-    let userId = userFromToken.id;
-    if (req.params.id && res.locals.user.role.includes('admin')) {
-      userId = req.params.id;
-    }
-
+    const userId = userFromToken.id;
+  
     const user: User = req.body as User;
     if (user.password) {
       user.password = await bcrypt.hash(user.password, salt);
